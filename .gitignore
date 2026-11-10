@@ -1,0 +1,13 @@
+# Virtual Machine files
+*.iso
+*.ova
+*.vdi
+*.vbox
+
+# Ignore large raw packet dumps (only commit small trimmed pcaps under 5MB)
+*.pcap_huge
+*.raw
+
+# OS junk
+.DS_Store
+Thumbs.db

@@ -9,4 +9,4 @@ Setup is simple, just two VMs running inside a NAT network inside virtual box, n
 |**Ubuntu Server**|`10.0.2.5`|The target server (SSH, web services, file transfers)|
 
 The planned structure for now is as follows, changes may occur as i go about it. But this is the initial plan:
-![[initial-repo-structure.png]]
+![Initial Repo Structure](labs/images/initial-repo-structure.png)

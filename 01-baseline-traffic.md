@@ -18,7 +18,7 @@ Before any web traffic could even happen, the machines had to figure out who was
     - _"10.0.2.15 is at 08:00:27:c3:fb:76"_ (Kali replying with its physical hardware address)
     - Once they know each other's MAC addresses, they save it to their ARP table so they don't have to keep asking.
 
-![[01-arp-dhcp.png]]
+![arp-dhcp](labs/images/01-arp-dhcp.png)
 
 ### **2.DNS**
 Before `curl` could touch `example.com`, it had to find out what IP address belonged to that name. Computers can't route packets to letters, only numbers.
@@ -30,7 +30,7 @@ Filtering by `dns` showed:
     - **`AAAA` record:** Asking for the IPv6 address.
 - The DNS server replied back with the IP: **`104.20.23.154`** (hosted on Cloudflare).
 - Both the request and response shared the same Transaction ID (like a receipt number) so Kali knew which answer matched which question.
-![[01-dns.png]]
+  ![01-dns](labs/images/01-dns.png)
 
 ### **3.TCP 3-Way Handshake**
 
@@ -49,7 +49,8 @@ Once the line was open, the actual HTTP conversation took place:
 - **`HEAD / HTTP/1.1`:** Kali asked for the headers. Because I used the `-I` flag in `curl`, it only asked for metadata, not the whole HTML website.
 - **TCP `[ACK]` right after:** Interestingly, a plain TCP ACK packet appeared right after the request. This is TCP acting like a postal delivery confirmation—the server's network stack immediately confirmed _"I received your message"_ before the web server software even finished preparing the response.
 - **`HTTP/1.1 200 OK`:** The server sent back the headers in plain text (status `200 OK`, date, server type).
-![[01-tcp-http.png]]
+![01-tcp-http](labs/images/tcp-http.png)
+
 ### **5.Closing connection (`FIN, ACK`)**
 Because `curl -I` only wanted the headers and nothing else, as soon as it got the `200 OK`, it was done.
 
@@ -58,4 +59,4 @@ Instead of keeping the port open, Kali initiated a clean teardown:
 - Kali sent **`[FIN, ACK]`** (_"I'm finished, closing connection"_).
 - The server acknowledged and closed its side with its own **`[FIN, ACK]`**.
 - Connection cleanly close.
-![[01-fin-ack.png]]
+![01-fin-ack](labs/images/01-fin-ack.png)

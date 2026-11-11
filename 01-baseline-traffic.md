@@ -49,7 +49,7 @@ Once the line was open, the actual HTTP conversation took place:
 - **`HEAD / HTTP/1.1`:** Kali asked for the headers. Because I used the `-I` flag in `curl`, it only asked for metadata, not the whole HTML website.
 - **TCP `[ACK]` right after:** Interestingly, a plain TCP ACK packet appeared right after the request. This is TCP acting like a postal delivery confirmation—the server's network stack immediately confirmed _"I received your message"_ before the web server software even finished preparing the response.
 - **`HTTP/1.1 200 OK`:** The server sent back the headers in plain text (status `200 OK`, date, server type).
-![01-tcp-http](labs/images/tcp-http.png)
+![01-tcp-http](labs/images/01-tcp-http.png)
 
 ### **5.Closing connection (`FIN, ACK`)**
 Because `curl -I` only wanted the headers and nothing else, as soon as it got the `200 OK`, it was done.
